@@ -1,103 +1,82 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [input, setInput] = useState('');
+  const [out, setOut] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true); 
+    setOut(''); 
+    setErr(null);
+
+    try {
+      const r = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: input }),
+      });
+      
+      // Check if we got a valid response
+      if (!r.ok) {
+        // Try to get error message from response
+        const text = await r.text();
+        let errorMsg;
+        try {
+          const data = JSON.parse(text);
+          errorMsg = data?.error || `HTTP ${r.status}`;
+        } catch {
+          errorMsg = `HTTP ${r.status}: ${text}`;
+        }
+        setErr(errorMsg);
+      } else {
+        const data = await r.json();
+        if (data?.error) {
+          setErr(data.error);
+        } else {
+          setOut(data.text || '(no text)');
+        }
+      }
+    } catch (fetchErr: any) {
+      setErr(`Network error: ${fetchErr.message}`);
+    }
+    
+    setLoading(false);
+  }
+
+  return (
+    <main style={{ maxWidth: 720, margin: '40px auto', fontFamily: 'system-ui' }}>
+      <h1>Inference Demo</h1>
+      <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 8 }}>
+        <textarea
+          rows={6}
+          placeholder="Ask the model…"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          style={{ width: '100%', padding: '8px' }}
+        />
+        <button disabled={loading || !input.trim()}>
+          {loading ? 'Generating…' : 'Send'}
+        </button>
+        {err && <span style={{color:'crimson'}}>{err}</span>}
+      </form>
+      {out && (
+        <div style={{ marginTop: 16 }}>
+          <h3>Response:</h3>
+          <pre style={{ 
+            whiteSpace: 'pre-wrap', 
+            backgroundColor: '#f5f5f5', 
+            padding: '12px', 
+            borderRadius: '4px' 
+          }}>
+            {out}
+          </pre>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      )}
+    </main>
   );
 }
