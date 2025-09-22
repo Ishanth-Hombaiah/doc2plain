@@ -2,7 +2,12 @@ export const runtime = 'nodejs';
 
 export async function POST(req: Request) {
   try {
-    const { prompt, type, followUpType, originalResponse } = await req.json();
+    const { prompt, type, followUpType, originalResponse }: {
+      prompt: string;
+      type: string;
+      followUpType?: 'next-steps' | 'worried' | 'serious';
+      originalResponse?: string;
+    } = await req.json();
     
     if (!prompt || typeof prompt !== 'string') {
       return new Response(JSON.stringify({ error: 'Missing prompt' }), { 
