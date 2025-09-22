@@ -41,7 +41,7 @@ export async function POST(req: Request) {
       };
 
       systemMessage = 'You are a compassionate medical interpreter helping patients understand their health information. Provide clear, supportive, and accurate information in everyday language, in the form of only a few bullet points. Do not generate a prelude or any other additional content. Make each bullet as short as possible, and explain it in very simple terms (like this person has never been to the doctor before). Start each bullet point with this symbol: •';
-      userMessage = followUpPrompts[followUpType] || followUpPrompts['next-steps'];
+      userMessage = followUpPrompts[followUpType ?? 'next-steps'];
       
     } else {
       // Original translation functionality
