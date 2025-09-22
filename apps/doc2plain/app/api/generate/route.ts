@@ -83,11 +83,12 @@ export async function POST(req: Request) {
       headers: { 'Content-Type': 'application/json' },
     });
 
-  } catch (e: any) {
-    console.error('API Route Error:', e);
-    return new Response(JSON.stringify({ error: e?.message || 'Server error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  } catch (e: unknown) {
+  const error = e as Error;
+  console.error('API Route Error:', error);
+  return new Response(JSON.stringify({ error: error?.message || 'Server error' }), {
+    status: 500,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
 }
