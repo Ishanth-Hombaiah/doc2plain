@@ -1,5 +1,11 @@
 export const runtime = 'nodejs';
 
+export async function GET() {
+  return new Response(JSON.stringify({ ok: true, method: 'GET' }), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
 export async function POST(req: Request) {
   try {
     const { prompt, type, followUpType, originalResponse }: {
