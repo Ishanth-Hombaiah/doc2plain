@@ -31,12 +31,16 @@ export async function POST(req: Request) {
         model: 'llama-3.3-70b-versatile', 
         messages: [
           {
+            role: 'system',
+            content: 'Translate the following input from medical terminology into the output of bullet points of everyday language, summarizing the contents of the input. Do not generate a prelude or any other additional content. Make each bullet as short as possible, but make it as detailed and thorough as possible, and explain it in very simple terms (like this person has never been to the doctor before)'
+          },
+          {
             role: 'user',
             content: prompt
           }
         ],
-        max_tokens: 150,
-        temperature: 0.7,
+        max_tokens: 300, 
+        temperature: 0.3, 
       }),
     });
 
@@ -51,7 +55,7 @@ export async function POST(req: Request) {
     }
 
     const text = data.choices?.[0]?.message?.content || 'No response generated';
-    console.log(text);
+
     return new Response(JSON.stringify({ text }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
