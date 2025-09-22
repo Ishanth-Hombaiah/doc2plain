@@ -10,7 +10,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [followUpLoading, setFollowUpLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   async function handleSubmit() {
     setLoading(true); 
@@ -43,33 +42,16 @@ export default function Home() {
           setOut(data.text || '(no text)');
         }
       }
-    } catch (fetchErr: any) {
-      setErr(`Network error: ${fetchErr.message}`);
-    }
+    } catch (error: unknown) {
+  const err = error as Error;
+  setErr(err.message || 'An error occurred');
+  }
     
     setLoading(false);
   }
-
-    function handleFileUpload() {
-    // Create invisible file input
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = '.pdf,.doc,.docx,.txt,.jpg,.jpeg,.png';
-    fileInput.style.display = 'none';
-    
-    fileInput.onchange = (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0];
-      if (file) {
-        setSelectedFile(file);
-        // File is selected but not processed - as requested
-      }
-    };
-    
-    document.body.appendChild(fileInput);
-    fileInput.click();
-    document.body.removeChild(fileInput);
+  function handleFileUpload() {
+    // todo
   }
-
   async function handleFollowUp(type: 'next-steps' | 'worried' | 'serious') {
     if (!input || !out) return;
     
@@ -638,7 +620,7 @@ export default function Home() {
                       opacity: followUpLoading ? 0.6 : 1
                     }}
                   >
-                    I'm feeling worried...
+                    I&apos;m feeling worried...
                   </button>
                   <button 
                     onClick={() => handleFollowUp('serious')}
