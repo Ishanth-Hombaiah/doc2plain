@@ -1,8 +1,19 @@
 export const runtime = 'nodejs';
 
+export async function GET() {
+  return new Response(JSON.stringify({ ok: true, method: 'GET' }), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
 export async function POST(req: Request) {
   try {
-    const { prompt, type, followUpType, originalResponse } = await req.json();
+    const { prompt, type, followUpType, originalResponse }: {
+      prompt: string;
+      type: string;
+      followUpType?: 'next-steps' | 'worried' | 'serious';
+      originalResponse?: string;
+    } = await req.json();
     
     if (!prompt || typeof prompt !== 'string') {
       return new Response(JSON.stringify({ error: 'Missing prompt' }), { 
@@ -27,7 +38,7 @@ export async function POST(req: Request) {
 
     if (type === 'followup') {
       // Handle follow-up questions
-      const followUpPrompts = {
+      const followUpPrompts: Record<string, string> = {
         'next-steps': `Based on the original medical information "${prompt}" and the translation provided "${originalResponse}", please provide specific, actionable next steps the patient should take. Be practical and clear about what they should do, when they should do it, and who they should contact. Keep it simple and reassuring.`,
         
         'worried': `The patient is feeling worried about this medical information: "${prompt}". They received this translation: "${originalResponse}". Please provide comfort and reassurance while being honest. Help them understand what to expect, address common concerns, and give them emotional support. Use a warm, empathetic tone.`,
@@ -36,7 +47,7 @@ export async function POST(req: Request) {
       };
 
       systemMessage = 'You are a compassionate medical interpreter helping patients understand their health information. Provide clear, supportive, and accurate information in everyday language, in the form of only a few bullet points. Do not generate a prelude or any other additional content. Make each bullet as short as possible, and explain it in very simple terms (like this person has never been to the doctor before). Start each bullet point with this symbol: •';
-      userMessage = followUpPrompts[followUpType] || followUpPrompts['next-steps'];
+      userMessage = followUpPrompts[followUpType ?? 'next-steps'];
       
     } else {
       // Original translation functionality
@@ -83,11 +94,12 @@ export async function POST(req: Request) {
       headers: { 'Content-Type': 'application/json' },
     });
 
-  } catch (e: any) {
-    console.error('API Route Error:', e);
-    return new Response(JSON.stringify({ error: e?.message || 'Server error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  } catch (e: unknown) {
+  const error = e as Error;
+  console.error('API Route Error:', error);
+  return new Response(JSON.stringify({ error: error?.message || 'Server error' }), {
+    status: 500,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
 }

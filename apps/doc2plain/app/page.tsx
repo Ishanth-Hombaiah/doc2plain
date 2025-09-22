@@ -87,8 +87,9 @@ export default function Home() {
           setFollowUps(prev => [...prev, data.text || '(no response)']);
         }
       }
-    } catch (fetchErr: any) {
-      setErr(`Network error: ${fetchErr.message}`);
+    } catch (fetchErr: unknown) {
+      const error = fetchErr as Error;
+      setErr(`Network error: ${error.message}`);
     }
     
     setFollowUpLoading(false);
@@ -136,7 +137,6 @@ export default function Home() {
                 background: 'none',
                 border: 'none',
                 color: '#307091',
-                textDecoration: 'none',
                 textUnderlineOffset: '5px',
                 fontSize: '16px',
                 fontWeight: '400',
@@ -152,7 +152,6 @@ export default function Home() {
                 background: 'none',
                 border: 'none',
                 color: '#307091',
-                textDecoration: 'none',
                 textUnderlineOffset: '5px',
                 fontSize: '16px',
                 fontWeight: '400',
@@ -216,16 +215,18 @@ export default function Home() {
                 transform: 'translateY(0px)'
               }}
               onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#307091';
-                e.target.style.color = 'white';
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 8px 25px rgba(0,182,255,0.13)';
+                const el = e.currentTarget as HTMLButtonElement;
+                el.style.backgroundColor = '#307091';
+                el.style.color = 'white';
+                el.style.transform = 'translateY(-2px)';
+                el.style.boxShadow = '0 8px 25px rgba(0,182,255,0.13)';
               }}
               onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'rgba(0,182,255,0.13)';
-                e.target.style.color = '#307091';
-                e.target.style.transform = 'translateY(0px)';
-                e.target.style.boxShadow = 'none';
+                const el = e.currentTarget as HTMLButtonElement;
+                el.style.backgroundColor = 'rgba(0,182,255,0.13)';
+                el.style.color = '#307091';
+                el.style.transform = 'translateY(0px)';
+                el.style.boxShadow = 'none';
               }}
             >
               Explore -{'>'}
