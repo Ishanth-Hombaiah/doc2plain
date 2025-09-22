@@ -250,7 +250,7 @@ export default function Home() {
             </button>
           </div>
           
-          {/* Decorative circles */}
+          {/* Decorative hearts */}
           <div style={{
             flex: '1',
             position: 'relative',
@@ -259,41 +259,22 @@ export default function Home() {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            {/* Large background circle */}
-            <div style={{
-              position: 'absolute',
-              width: '350px',
-              height: '350px',
-              backgroundColor: 'rgba(0,182,255,0.13)',
-              borderRadius: '50%',
-              top: '50px',
-              right: '0px',
-              opacity: 0.6
-            }}></div>
-            
-            {/* Medium circle */}
-            <div style={{
-              position: 'absolute',
-              width: '200px',
-              height: '200px',
-              backgroundColor: 'rgba(0,182,255,0.13)',
-              borderRadius: '50%',
-              bottom: '20px',
-              right: '100px',
-              opacity: 0.7
-            }}></div>
-            
-            {/* Small circle */}
-            <div style={{
-              position: 'absolute',
-              width: '120px',
-              height: '120px',
-              backgroundColor: 'rgba(0,182,255,0.13)',
-              borderRadius: '50%',
-              top: '0px',
-              right: '200px',
-              opacity: 0.45
-            }}></div>
+            {/* Large background heart */}
+            <img
+              src="/doc2plain_heart.png"
+              alt="Decorative heart"
+              style={{
+                position: 'absolute',
+                width: '700px',
+                height: '700px',
+                top: '-150px',
+                right: '-75px',
+                opacity: 1.0,
+                objectFit: 'contain',
+                pointerEvents: 'none',
+                userSelect: 'none'
+              }}
+            />
           </div>
         </main>
       )}
@@ -336,7 +317,7 @@ export default function Home() {
                 lineHeight: '1.6',
                 marginBottom: '16px'
               }}>
-                Doc2Plain transforms complex medical jargon into clear, understandable language that patients can easily comprehend. Our AI-powered tool breaks down medical reports, test results, and documentation into simple bullet points, helping bridge the communication gap between healthcare providers and patients.
+                 Doc2Plain transforms dense medical descriptions into more common language that patients can easily comprehend. Our AI-powered tool breaks down medical reports, test results, and documentation into simple bullet points so providers can spend less time translating and more time saving lives.
               </p>
               <p style={{
                 color: '#307091',
@@ -344,7 +325,7 @@ export default function Home() {
                 fontWeight: '300',
                 lineHeight: '1.6'
               }}>
-                Whether you're trying to understand a CT scan report, lab results, or treatment recommendations, Doc2Plain provides instant translations along with follow-up support for common concerns like next steps, worries, and severity assessments.
+                From lab results to treatment recommendations, Doc2Plain provides instant translations along with follow-up support for common concerns like next steps, worries, and severity assessments.
               </p>
             </div>
 
@@ -371,7 +352,7 @@ export default function Home() {
                 }}>
                   <h3 style={{
                     color: '#307091',
-                    fontSize: '18px',
+                    fontSize: '20px',
                     fontWeight: '400',
                     marginBottom: '12px'
                   }}>
@@ -379,7 +360,7 @@ export default function Home() {
                   </h3>
                   <ul style={{
                     color: '#307091',
-                    fontSize: '16px',
+                    fontSize: '18px',
                     fontWeight: '300',
                     lineHeight: '1.8',
                     paddingLeft: '20px'
@@ -387,7 +368,6 @@ export default function Home() {
                     <li>Next.js 14</li>
                     <li>React 18</li>
                     <li>TypeScript</li>
-                    <li>CSS-in-JS</li>
                   </ul>
                 </div>
 
@@ -399,7 +379,7 @@ export default function Home() {
                 }}>
                   <h3 style={{
                     color: '#307091',
-                    fontSize: '18px',
+                    fontSize: '20px',
                     fontWeight: '400',
                     marginBottom: '12px'
                   }}>
@@ -407,7 +387,7 @@ export default function Home() {
                   </h3>
                   <ul style={{
                     color: '#307091',
-                    fontSize: '16px',
+                    fontSize: '18px',
                     fontWeight: '300',
                     lineHeight: '1.8',
                     paddingLeft: '20px'
@@ -426,7 +406,7 @@ export default function Home() {
                 }}>
                   <h3 style={{
                     color: '#307091',
-                    fontSize: '18px',
+                    fontSize: '20px',
                     fontWeight: '400',
                     marginBottom: '12px'
                   }}>
@@ -434,7 +414,7 @@ export default function Home() {
                   </h3>
                   <ul style={{
                     color: '#307091',
-                    fontSize: '16px',
+                    fontSize: '18px',
                     fontWeight: '300',
                     lineHeight: '1.8',
                     paddingLeft: '20px'
@@ -453,7 +433,7 @@ export default function Home() {
                 }}>
                   <h3 style={{
                     color: '#307091',
-                    fontSize: '18px',
+                    fontSize: '20px',
                     fontWeight: '400',
                     marginBottom: '12px'
                   }}>
@@ -461,7 +441,7 @@ export default function Home() {
                   </h3>
                   <ul style={{
                     color: '#307091',
-                    fontSize: '16px',
+                    fontSize: '18px',
                     fontWeight: '300',
                     lineHeight: '1.8',
                     paddingLeft: '20px'
@@ -473,36 +453,11 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-            <div style={{
-              backgroundColor: 'rgba(0,182,255,0.03)',
-              padding: '24px',
-              borderRadius: '8px',
-              border: '1px solid rgba(0,182,255,0.13)'
-            }}>
-              <h2 style={{
-                color: '#307091',
-                fontSize: '20px',
-                fontWeight: '400',
-                marginBottom: '12px'
-              }}>
-                Our Mission
-              </h2>
-              <p style={{
-                color: '#307091',
-                fontSize: '16px',
-                fontWeight: '300',
-                lineHeight: '1.6',
-                margin: '0'
-              }}>
-                To democratize healthcare information by making medical language accessible to everyone, empowering patients to better understand their health and make informed decisions about their care.
-              </p>
-            </div>
           </div>
         </main>
       )}
 
-      {/* Explore Page Content */}
+      {/* explore page */}
       {currentPage === 'explore' && (
         <main style={{
           maxWidth: '1200px',
@@ -512,7 +467,7 @@ export default function Home() {
           gridTemplateColumns: '1fr 1fr',
           gap: '48px'
         }}>
-          {/* Medical Info Section */}
+          {/* med info */}
           <div>
             <h2 style={{
               color: '#307091',
@@ -521,7 +476,7 @@ export default function Home() {
               marginBottom: '16px',
               margin: '0 0 32px 0'
             }}>
-              Medical Information
+              Medical Text
             </h2>
             
             <div>
@@ -536,7 +491,7 @@ export default function Home() {
                 <textarea
                   value={input}
                   onChange={e => setInput(e.target.value)}
-                  placeholder="CT scan indicates pulmonary nodule in the right upper lobe; follow-up imaging to rule out malignancy"
+                  placeholder="Type here to translate..."
                   style={{
                     width: '100%',
                     height: '200px',
@@ -553,7 +508,7 @@ export default function Home() {
                   }}
                 />
                 
-                {/* Plus button */}
+                {/* file upload button */}
                 <button
                   type="button"
                   onClick={handleFileUpload}
@@ -578,7 +533,7 @@ export default function Home() {
                   +
                 </button>
                 
-                {/* Arrow button */}
+                {/* arrow translate button */}
                 <button
                   type="button"
                   disabled={loading || !input.trim()}
@@ -618,7 +573,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Translation Section */}
+          {/* translation output section */}
           <div>
             <h2 style={{
               color: '#307091',
@@ -632,8 +587,6 @@ export default function Home() {
             
             {out ? (
               <div>
-                
-                
                 <div style={{
                         backgroundColor: 'rgba(0,182,255,0.03)',
                         border: '1px solid rgba(0,182,255,0.13)',
@@ -685,7 +638,7 @@ export default function Home() {
                       opacity: followUpLoading ? 0.6 : 1
                     }}
                   >
-                    I'm feeling worried
+                    I'm feeling worried...
                   </button>
                   <button 
                     onClick={() => handleFollowUp('serious')}
@@ -706,7 +659,7 @@ export default function Home() {
                   </button>
                 </div>
 
-                {/* Follow-up responses */}
+                {/* follow up responses */}
                 {followUps.length > 0 && (
                   <div style={{ marginTop: '32px' }}>
                     {followUps.map((followUp, index) => (
@@ -727,7 +680,7 @@ export default function Home() {
                   </div>
                 )}
 
-                {/* Loading indicator for follow-ups */}
+                {/* indicator for follow ups */}
                 {followUpLoading && (
                   <div style={{
                     marginTop: '20px',
@@ -736,19 +689,29 @@ export default function Home() {
                     fontSize: '16px',
                     textAlign: 'center'
                   }}>
-                    Getting more information...
+                    Getting more info...
                   </div>
                 )}
               </div>
             ) : (
               <div style={{
-                color: '#307091',
-                opacity: '0.5',
-                fontSize: '16px',
-                fontWeight: '300',
-                
+                backgroundColor: 'rgba(0,182,255,0.03)',
+                borderRadius: '8px',
+                border: '1px solid rgba(0,182,255,0.13)',
+                minHeight: '208px',
+                position: 'relative',
+                marginBottom: '16px',
+                display: 'flex',
+                padding: '16px'
               }}>
-                {loading ? 'Translating...' : 'Enter medical information to see translation'}
+                <div style={{
+                  color: '#307091',
+                  opacity: '0.5',
+                  fontSize: '16px',
+                  fontWeight: '300'
+                }}>
+                  {loading ? 'Translating...' : 'Enter medical information to see translation'}
+                </div>
               </div>
             )}
           </div>
