@@ -87,8 +87,9 @@ export default function Home() {
           setFollowUps(prev => [...prev, data.text || '(no response)']);
         }
       }
-    } catch (fetchErr: any) {
-      setErr(`Network error: ${fetchErr.message}`);
+    } catch (fetchErr: unknown) {
+      const error = fetchErr as Error;
+      setErr(`Network error: ${error.message}`);
     }
     
     setFollowUpLoading(false);
