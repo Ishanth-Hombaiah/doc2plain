@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     }
 
     const text = data.choices?.[0]?.message?.content || 'No response generated';
-
+    console.log(text);
     return new Response(JSON.stringify({ text }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
