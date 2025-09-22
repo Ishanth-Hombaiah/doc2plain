@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
     if (type === 'followup') {
       // Handle follow-up questions
-      const followUpPrompts = {
+      const followUpPrompts: Record<string, string> = {
         'next-steps': `Based on the original medical information "${prompt}" and the translation provided "${originalResponse}", please provide specific, actionable next steps the patient should take. Be practical and clear about what they should do, when they should do it, and who they should contact. Keep it simple and reassuring.`,
         
         'worried': `The patient is feeling worried about this medical information: "${prompt}". They received this translation: "${originalResponse}". Please provide comfort and reassurance while being honest. Help them understand what to expect, address common concerns, and give them emotional support. Use a warm, empathetic tone.`,
