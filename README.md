@@ -1,5 +1,6 @@
-# 🌟 Doc2Plain
+# 🌟 Doc2Plain [[Link](https://doc2plain.vercel.app/)]
 ## 📖 Get Health Clarity
+
 Doc2Plain transforms **dense medical information** into **easy to understand language**!
 
 - Enter any medical text or information you want to understand
