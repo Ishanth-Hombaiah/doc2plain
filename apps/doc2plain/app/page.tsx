@@ -10,6 +10,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [followUpLoading, setFollowUpLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  
 
   async function handleSubmit() {
     setLoading(true); 
@@ -51,6 +52,7 @@ export default function Home() {
   }
   function handleFileUpload() {
     // todo
+    return
   }
   async function handleFollowUp(type: 'next-steps' | 'worried' | 'serious') {
     if (!input || !out) return;
@@ -101,7 +103,7 @@ export default function Home() {
       backgroundColor: '#F6FCFF',
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
     }}>
-      {/* Header */}
+      {/* header */}
       <header style={{
         backgroundColor: 'white',
         borderBottom: '1px solid rgba(0,182,255,0.13)',
@@ -165,7 +167,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Home Page Content */}
+      {/* home page*/}
       {currentPage === 'home' && (
         <main style={{
           maxWidth: '1200px',
@@ -214,26 +216,26 @@ export default function Home() {
                 transition: 'all 0.3s ease',
                 transform: 'translateY(0px)'
               }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLButtonElement;
-                el.style.backgroundColor = '#307091';
-                el.style.color = 'white';
-                el.style.transform = 'translateY(-2px)';
-                el.style.boxShadow = '0 8px 25px rgba(0,182,255,0.13)';
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLButtonElement;
-                el.style.backgroundColor = 'rgba(0,182,255,0.13)';
-                el.style.color = '#307091';
-                el.style.transform = 'translateY(0px)';
-                el.style.boxShadow = 'none';
-              }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLButtonElement;
+              el.style.backgroundColor = '#307091';
+              el.style.color = 'white';
+              el.style.transform = 'translateY(-2px)';
+              el.style.boxShadow = '0 8px 25px rgba(0,182,255,0.13)';
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLButtonElement;
+              el.style.backgroundColor = 'rgba(0,182,255,0.13)';
+              el.style.color = '#307091';
+              el.style.transform = 'translateY(0px)';
+              el.style.boxShadow = 'none';
+            }}
             >
               Explore -{'>'}
             </button>
           </div>
           
-          {/* Decorative hearts */}
+          {/* Decorative heart */}
           <div style={{
             flex: '1',
             position: 'relative',
